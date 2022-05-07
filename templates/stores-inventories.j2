@@ -1,0 +1,45 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Stores Inventories
+{% endblock %}
+
+
+{% block heading %}
+Stores Inventories
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in stores_inventories[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in stores_inventories %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/stores-inventories" />Delete</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <form action="http://flip3.engr.oregonstate.edu:9633/stores-inventories" method="POST">
+    <fieldset><legend> Add a Store Inventory</legend>
+    <label>id_item_type
+        <input type ="number" name="id_item_type" size=12 maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>
+{% endblock %}

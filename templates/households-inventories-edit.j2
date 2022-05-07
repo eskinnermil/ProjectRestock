@@ -1,0 +1,36 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households Inventories - Edit
+{% endblock %}
+
+
+{% block heading %}
+Households Inventories - Edit Selection
+{% endblock %}
+
+
+{% block content %}
+    <form action="http://flip3.engr.oregonstate.edu:9633/households-inventories" method="PUT">
+    <fieldset><legend> Edit a Household Inventory</legend>
+    <label>id_household
+        <input type ="number" name="id_household" size="12" maxlength="45" required="required">
+    </label>
+    <label>id_item
+        <input type="number" name="id_item" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>amount_left
+        <input type="text" name="amount_left" size="12" maxlength="45" required="required">
+    </label>
+    <br />    
+    <label>restock_status
+        <input type="text" name="restock_status" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='http://flip3.engr.oregonstate.edu:9633/households-inventories';" />   
+    </fieldset>
+    </form>    
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Home
+{% endblock %}
+
+
+{# {% block heading %}
+Home
+{% endblock %} #}
+
+
+{% block content %}
+    <div class = "Menu">
+    <h3>Households</h3>
+        <ul>
+        <li>Display households available</li>
+        <li>Add a new household</li>
+        <li>Delete an existing household</li>
+        </ul>
+    <h3>Households Members</h3>
+        <ul>
+        <li>Display members of different households</li>
+        <li>Add a new household member</li>
+        <li>Delete an existing household member</li>
+        </ul>
+    <h3>Households Inventories</h3>
+        <ul>
+        <li>Display items found in household inventories</li>
+        <li>Add new household inventory stock</li>
+        <li>Edit current inventory stock</li>
+        <li>Delete existing inventory stock</li>
+        </ul>
+    <h3>Households Items</h3>
+        <ul>
+        <li>Display household items</li>
+        <li>Add a new household item</li>
+        <li>Delete an existing household item</li>
+        </ul>
+    <h3>Items Types</h3>
+        <ul>
+        <li>Display item types found in households</li>
+        <li>Add a new item type</li>
+        <li>Delete an existing item type</li>
+        </ul>
+    <h3>Stores Inventories</h3>
+        <ul>
+        <li>Display item types found in store inventories</li>
+        <li>Add an item type to a store's inventory</li>
+        <li>Delete an item type from a store's inventory</li>
+        </ul>
+    <h3>Stores</h3>
+        <ul>
+        <li>Display stores available</li>
+        <li>Add a new store</li>
+        <li>Delete an existing store</li>
+        </ul>
+    </div>
+{% endblock %}

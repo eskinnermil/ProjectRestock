@@ -1,0 +1,54 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households Members
+{% endblock %}
+
+
+{% block heading %}
+Households Members
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in households_members[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Edit</th>
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in households_members %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-members-edit" />Edit</td>
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-members" />Delete</td>                
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <form action="http://flip3.engr.oregonstate.edu:9633/households-members" method="POST">
+    <fieldset><legend> Add a Household Member</legend>
+    <label>id_household
+        <input type ="number" name="id_household" size=12 maxlength="45" required="required">
+    </label>
+    <label>name
+        <input type="text" name="name" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>runner_status
+        <input type="text" name="runner_status" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>
+{% endblock %}

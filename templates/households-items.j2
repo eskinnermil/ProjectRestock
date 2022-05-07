@@ -1,0 +1,59 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households Items
+{% endblock %}
+
+
+{% block heading %}
+Households Items
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in households_items[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in households_items %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-items" />Delete</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <form action="http://flip3.engr.oregonstate.edu:9633/households-items" method="POST">
+    <fieldset><legend> Add a Household Item</legend>
+    <label>id_item_type
+        <select name="number" required>
+        <option value="">Select a type</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        </select>
+    </label>
+    <br />
+    <label>name
+        <input type="text" name="name" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>best_if_used_by
+        <input type="text" name="best_if_used_by" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>
+{% endblock %}

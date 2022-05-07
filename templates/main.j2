@@ -1,0 +1,56 @@
+<html>
+<head>
+
+<style>
+#Nav {
+    display: inline;
+}
+#Header {text-align: center;
+}
+</style>
+
+    <title>
+    {% block title %}
+    <! -- Placeholder for Page Title -->
+    {% endblock %} - Project Restock
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+
+</head>
+
+<body>
+
+    <div>
+        <ul>
+            <li id="Nav"><a href="{{url_for('index')}}">Index || </a></li>
+            <li id="Nav"><a href="{{url_for('households')}}">Households || </a></li>
+            <li id="Nav"><a href="{{url_for('households_members')}}">Households Members || </a></li>
+            <li id="Nav"><a href="{{url_for('households_inventories')}}">Households Inventories || </a></li>
+            <li id="Nav"><a href="{{url_for('households_items')}}">Households Items || </a></li>
+            <li id="Nav"><a href="{{url_for('items_types')}}">Items Types || </a></li>
+            <li id="Nav"><a href="{{url_for('stores_inventories')}}">Stores Inventories || </a></li>
+            <li id="Nav"><a href="{{url_for('stores')}}">Stores</a></li>
+
+        </ul>
+    </div>
+
+    <h1 id="Header">
+    Project Restock
+    </h1>
+
+    <p id="Header">No more store run planning! Find your items and know before you go.</p>
+    
+    <h1 id="title">
+    {% block heading %}
+    <!-- Placeholder for Page Header -->
+    {% endblock %}
+    </h1>
+
+    <div id="content">
+    {% block content %}
+    <!-- Placeholder for Page Content -->
+    {% endblock %}
+    </div>
+    
+</body>
+</html>

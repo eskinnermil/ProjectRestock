@@ -1,0 +1,58 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households Inventories
+{% endblock %}
+
+
+{% block heading %}
+Households Inventories
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in households_inventories[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Edit</th>
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in households_inventories %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-inventories-edit" />Edit</td>
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-inventories" />Delete</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <form action="http://flip3.engr.oregonstate.edu:9633/households-inventories" method="POST">
+    <fieldset><legend> Add a Household Inventory</legend>
+    <label>id_household
+        <input type ="number" name="id_household" size="12" maxlength="45" required="required">
+    </label>
+    <label>id_item
+        <input type="number" name="id_item" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>amount_left
+        <input type="text" name="amount_left" size="12" maxlength="45" required="required">
+    </label>
+    <br />    
+    <label>restock_status
+        <input type="text" name="restock_status" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>    
+{% endblock %}

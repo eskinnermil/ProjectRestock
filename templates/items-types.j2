@@ -1,0 +1,45 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Items Types
+{% endblock %}
+
+
+{% block heading %}
+Items Types
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in items_types[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in items_types %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/items-types" />Delete</td>                
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+<form action="http://flip3.engr.oregonstate.edu:9633/items-types" method="POST">
+    <fieldset><legend> Add an Item Type</legend>
+    <label>name
+        <input type="text" name="name" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>
+{% endblock %}

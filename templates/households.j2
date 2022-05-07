@@ -1,0 +1,49 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households
+{% endblock %}
+
+
+{% block heading %}
+Households
+{% endblock %}
+
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+            {% for key in households[0].keys() %}
+                <th>{{ key }}</th>
+            {% endfor %}
+                <th>Delete</th>
+            <tr>
+        <tbody>
+        {% for attribute in households %}
+            <tr>
+                {% for key in attribute.keys() %}
+                <td>{{attribute[key]}}</td>
+                {% endfor %}
+                <td><a href="http://flip3.engr.oregonstate.edu:9633/households" />Delete</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <form action="http://flip3.engr.oregonstate.edu:9633/households" method="POST">
+    <fieldset><legend> Add a Household</legend>
+    <label>name
+        <input type="text" name="name" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>address
+        <input type="text" name="address" size="12" maxlength="145" required="required">
+    </label>
+    <br />
+    <button type="submit">Add</button>
+    </fieldset>
+    </form>
+{% endblock %}

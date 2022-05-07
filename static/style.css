@@ -1,0 +1,16 @@
+#title {
+    padding: 10px;
+    color: #464646;
+}
+body {
+    background: rgb(255, 255, 255);
+}
+table {
+    width: 100%;
+    text-align: center;
+}
+th, td, tr, td {
+    padding: 8px;
+    border-style: solid;
+}
+
