@@ -27,15 +27,15 @@ Households Inventories
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-inventories-edit" />Edit</td>
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-inventories" />Delete</td>
+                <td><a href="https://projectrestock.herokuapp.com/households-inventories-edit" />Edit</td>
+                <td><a href="https://projectrestock.herokuapp.com/households-inventories" />Delete</td>
             </tr>
         {% endfor %}
     </table>
 
     <br />
 
-    <form action="http://flip3.engr.oregonstate.edu:9633/households-inventories" method="POST">
+    <form action="https://projectrestock.herokuapp.com/households-inventories" method="POST">
     <fieldset><legend> Add a Household Inventory</legend>
     <label>id_household
         <input type ="number" name="id_household" size="12" maxlength="45" required="required">

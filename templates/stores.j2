@@ -26,14 +26,14 @@ Stores
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/stores" />Delete</td>
+                <td><a href="https://projectrestock.herokuapp.com/stores" />Delete</td>
             </tr>
         {% endfor %}
     </table>
 
     <br />
 
-    <form action="http://flip3.engr.oregonstate.edu:9633/stores" method="POST">
+    <form action="https://projectrestock.herokuapp.com/stores" method="POST">
     <fieldset><legend> Add a Store</legend>
     <label>name
         <input type="text" name="name" size="12" maxlength="45" required="required">

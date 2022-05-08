@@ -12,7 +12,7 @@ Households Members - Edit Selection
 
 
 {% block content %}
-    <form action="http://flip3.engr.oregonstate.edu:9633/households-members" method="PUT">
+    <form action="https://projectrestock.herokuapp.com/households-members" method="PUT">
     <fieldset><legend> Edit a Household Member</legend>
     <label>id_household
         <input type ="number" name="id_household" size=12 maxlength="45" required="required">
@@ -26,7 +26,7 @@ Households Members - Edit Selection
     </label>
     <br />
     <button type="submit">Submit</button>
-    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='http://flip3.engr.oregonstate.edu:9633/households-members';" />   
+    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='https://projectrestock.herokuapp.com/households-members';" />   
     </fieldset>
     </form>
 {% endblock %}

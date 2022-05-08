@@ -26,14 +26,14 @@ Stores Inventories
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/stores-inventories" />Delete</td>
+                <td><a href="https://projectrestock.herokuapp.com/stores-inventories" />Delete</td>
             </tr>
         {% endfor %}
     </table>
 
     <br />
 
-    <form action="http://flip3.engr.oregonstate.edu:9633/stores-inventories" method="POST">
+    <form action="https://projectrestock.herokuapp.com/stores-inventories" method="POST">
     <fieldset><legend> Add a Store Inventory</legend>
     <label>id_item_type
         <input type ="number" name="id_item_type" size=12 maxlength="45" required="required">

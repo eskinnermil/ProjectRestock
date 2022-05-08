@@ -26,14 +26,14 @@ Items Types
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/items-types" />Delete</td>                
+                <td><a href="https://projectrestock.herokuapp.com/items-types" />Delete</td>                
             </tr>
         {% endfor %}
     </table>
 
     <br />
 
-<form action="http://flip3.engr.oregonstate.edu:9633/items-types" method="POST">
+<form action="https://projectrestock.herokuapp.com/items-types" method="POST">
     <fieldset><legend> Add an Item Type</legend>
     <label>name
         <input type="text" name="name" size="12" maxlength="45" required="required">

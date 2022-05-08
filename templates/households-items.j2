@@ -26,12 +26,12 @@ Households Items
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="http://flip3.engr.oregonstate.edu:9633/households-items" />Delete</td>
+                <td><a href="https://projectrestock.herokuapp.com/households-items" />Delete</td>
             </tr>
         {% endfor %}
     </table>
 
-    <form action="http://flip3.engr.oregonstate.edu:9633/households-items" method="POST">
+    <form action="https://projectrestock.herokuapp.com/households-items" method="POST">
     <fieldset><legend> Add a Household Item</legend>
     <label>id_item_type
         <select name="number" required>
