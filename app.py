@@ -5,10 +5,10 @@ import os
 
 # Connecting the app to the db
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_skinneem'
-app.config['MYSQL_PASSWORD'] = '0011'
-app.config['MYSQL_DB'] = 'cs340_skinneem'
+app.config['MYSQL_HOST'] = 'us-cdbr-east-05.cleardb.net'
+app.config['MYSQL_USER'] = 'bb9fb61850da11'
+app.config['MYSQL_PASSWORD'] = '2268e468'
+app.config['MYSQL_DB'] = 'heroku_01134a3df2efed9'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 mysql = MySQL(app)
 
