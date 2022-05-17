@@ -18,6 +18,7 @@ Stores
             {% for key in stores[0].keys() %}
                 <th>{{ key }}</th>
             {% endfor %}
+                <th>Edit</th>
                 <th>Delete</th>
             <tr>
         <tbody>
@@ -26,14 +27,15 @@ Stores
                 {% for key in attribute.keys() %}
                 <td>{{attribute[key]}}</td>
                 {% endfor %}
-                <td><a href="https://projectrestock.herokuapp.com/stores" />Delete</td>
+                <td><a href="{{url_for('stores_edit')}}" />Edit</td>
+                <td><a href="{{url_for('stores')}}" />Delete</td>
             </tr>
         {% endfor %}
     </table>
 
     <br />
 
-    <form action="https://projectrestock.herokuapp.com/stores" method="POST">
+    <form action="{{url_for('stores')}}" method="POST">
     <fieldset><legend> Add a Store</legend>
     <label>name
         <input type="text" name="name" size="12" maxlength="45" required="required">
@@ -43,7 +45,7 @@ Stores
         <input type="text" name="address" size="12" maxlength="145" required="required">
     </label>
     <br />
-    <label>hours_open
+    <label>hours open
         <input type="text" name="hours_open" size="12" maxlength="45" required="required">
     </label>
     <br />

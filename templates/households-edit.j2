@@ -1,0 +1,29 @@
+{% extends "main.j2" %}
+
+
+{% block title %}
+Households - Edit
+{% endblock %}
+
+
+{% block heading %}
+Households - Edit Selection
+{% endblock %}
+
+
+{% block content %}
+    <form action="{{url_for('households')}}" method="PUT">
+    <fieldset><legend> Edit a Household</legend>
+    <label>name
+        <input type="text" name="name" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <label>address
+        <input type="text" name="address" size="12" maxlength="45" required="required">
+    </label>
+    <br />
+    <button type="submit">Submit</button>
+    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='{{url_for('households')}}';" />   
+    </fieldset>
+    </form>
+{% endblock %}

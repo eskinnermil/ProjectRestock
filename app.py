@@ -14,9 +14,11 @@ mysql = MySQL(app)
 
 
 # Defining the app's routes
-@app.route('/')
-def root():
-    return redirect("/index.html")
+
+# Defining the app's routes
+# @app.route('/')
+# def root():
+#     return redirect("/index.html")
 
 
 @app.route('/index.html')
@@ -30,7 +32,7 @@ def households():
     #     if request.form.get("Create_Household"):
     #         name = request.form["name"]
     #         address = request.form["address"]
-    query = "SELECT * FROM Households;"
+    query = "SELECT Households.id_household AS id, name, address FROM Households;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -38,10 +40,14 @@ def households():
     cursor.close()
     return render_template("households.j2", households=results)
 
+@app.route('/households-edit')
+def households_edit():
+    return render_template("households-edit.j2")
+
 
 @app.route('/households-members')
 def households_members():
-    query = "SELECT * FROM Households_Members;"
+    query = "SELECT Households_Members.id_household_member AS id, Households_Members.name AS name, Households_Members.runner_status AS 'runner status', Households.name AS household FROM Households_Members INNER JOIN Households ON Households_Members.id_household = Households.id_household;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -56,7 +62,7 @@ def households_members_edit():
 
 @app.route('/households-inventories')
 def households_inventories():
-    query = "SELECT * FROM Households_Inventories;"
+    query = "SELECT Households_Inventories.id_household_inventory AS id, Households.name AS household, Households_Items.name AS items, Households_Inventories.amount_left AS 'amount left', Households_Inventories.restock_status AS 'restock status' FROM Households_Inventories INNER JOIN Households ON Households.id_household = Households_Inventories.id_household INNER JOIN Households_Items ON Households_Items.id_item = Households_Inventories.id_item ORDER BY Households_Inventories.id_household_inventory ASC;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -72,7 +78,7 @@ def households_inventories_edit():
 
 @app.route('/households-items')
 def households_items():
-    query = "SELECT * FROM Households_Items;"
+    query = "SELECT Households_Items.id_item AS id, Items_Types.name AS type, Households_Items.name AS name, Households_Items.best_if_used_by AS 'best if used by' FROM Households_Items INNER JOIN Items_Types ON Items_Types.id_item_type = Households_Items.id_item_type;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -83,7 +89,7 @@ def households_items():
 
 @app.route('/items-types')
 def items_types():
-    query = "SELECT * FROM Items_Types;"
+    query = "SELECT Items_Types.id_item_type AS id, Items_Types.name AS name FROM Items_Types;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -94,7 +100,7 @@ def items_types():
 
 @app.route('/stores-inventories')
 def stores_inventories():
-    query = "SELECT * FROM Stores_Inventories;"
+    query = "SELECT Items_Types.name AS 'item types', Stores.name AS stores FROM Stores_Inventories INNER JOIN Items_Types ON Items_Types.id_item_type = Stores_Inventories.id_item_type INNER JOIN Stores ON Stores.id_store = Stores_Inventories.id_store;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
@@ -105,13 +111,18 @@ def stores_inventories():
 
 @app.route('/stores')
 def stores():
-    query = "SELECT * FROM Stores;"
+    query = "SELECT Stores.id_store AS id, Stores.name AS name, Stores.address AS address, Stores.hours_open AS 'hours open' FROM Stores;"
     cursor = mysql.connection.cursor()
     cursor.execute(query)
     mysql.connection.commit()
     results = cursor.fetchall()
     cursor.close()
     return render_template("stores.j2", stores=results)
+
+@app.route('/stores-edit')
+def stores_edit():
+    return render_template("stores-edit.j2")
+
 
 
 # # Listening for the port

@@ -12,25 +12,25 @@ Households Inventories - Edit Selection
 
 
 {% block content %}
-    <form action="https://projectrestock.herokuapp.com/households-inventories" method="PUT">
+    <form action="{{url_for('households_inventories')}}" method="PUT">
     <fieldset><legend> Edit a Household Inventory</legend>
-    <label>id_household
+    <label>household
         <input type ="number" name="id_household" size="12" maxlength="45" required="required">
     </label>
-    <label>id_item
+    <label>item
         <input type="number" name="id_item" size="12" maxlength="45" required="required">
     </label>
     <br />
-    <label>amount_left
+    <label>amount left
         <input type="text" name="amount_left" size="12" maxlength="45" required="required">
     </label>
     <br />    
-    <label>restock_status
+    <label>restock status
         <input type="text" name="restock_status" size="12" maxlength="45" required="required">
     </label>
     <br />
-    <button type="submit">Add</button>
-    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='https://projectrestock.herokuapp.com/households-inventories';" />   
+    <button type="submit">Submit</button>
+    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='{{url_for('households_inventories')}}';" />   
     </fieldset>
     </form>    
 {% endblock %}
