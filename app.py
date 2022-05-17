@@ -16,9 +16,9 @@ mysql = MySQL(app)
 # Defining the app's routes
 
 # Defining the app's routes
-# @app.route('/')
-# def root():
-#     return redirect("/index.html")
+@app.route('/')
+def root():
+    return redirect("/index.html")
 
 
 @app.route('/index.html')
