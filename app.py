@@ -9,36 +9,43 @@ app.config['MYSQL_HOST'] = 'us-cdbr-east-05.cleardb.net'
 app.config['MYSQL_USER'] = 'bb9fb61850da11'
 app.config['MYSQL_PASSWORD'] = '2268e468'
 app.config['MYSQL_DB'] = 'heroku_01134a3df2efed9'
-app.config['MYSQL_CURSORCLASS'] = "DictCursor"
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
 
 # Defining the app's routes
-
-# Defining the app's routes
 @app.route('/')
 def root():
-    return redirect("/index.html")
+    return redirect('/index.html')
 
 
 @app.route('/index.html')
 def index():
-    return render_template("index.j2")
+    return render_template('index.j2')
 
 
-@app.route('/households', methods=["POST", "GET"])
+@app.route('/households', methods=['POST', 'GET'])
 def households():
-    # if request.method == "POST":
-    #     if request.form.get("Create_Household"):
-    #         name = request.form["name"]
-    #         address = request.form["address"]
-    query = "SELECT Households.id_household AS id, name, address FROM Households;"
-    cursor = mysql.connection.cursor()
-    cursor.execute(query)
-    mysql.connection.commit()
-    results = cursor.fetchall()
-    cursor.close()
-    return render_template("households.j2", households=results)
+    if request.method == 'POST':
+        if request.form.get('Add'):
+            name = request.form['name']
+            address = request.form['address']
+            
+            # no null inputs
+            query = 'INSERT INTO Households (name, address) VALUES (:nameInput, :addressInput);'
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, address))
+            mysql.connection.commit()
+            return redirect('/households')
+
+    if request.method == 'GET':
+        query = 'SELECT Households.id_household AS id, name, address FROM Households;'
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        mysql.connection.commit()
+        results = cursor.fetchall()
+        # cursor.close()
+        return render_template('households.j2', households=results)
 
 @app.route('/households-edit')
 def households_edit():
