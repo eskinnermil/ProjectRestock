@@ -27,12 +27,12 @@ def index():
 @app.route('/households', methods=['POST', 'GET'])
 def households():
     if request.method == 'POST':
-        if request.form.get('Add'):
+        if request.form.get('Add_Household'):
             name = request.form['name']
             address = request.form['address']
             
             # no null inputs
-            query = 'INSERT INTO Households (name, address) VALUES (:nameInput, :addressInput);'
+            query = 'INSERT INTO Households (name, address) VALUES (%s, %s);'
             cursor = mysql.connection.cursor()
             cursor.execute(query, (name, address))
             mysql.connection.commit()
@@ -44,12 +44,43 @@ def households():
         cursor.execute(query)
         mysql.connection.commit()
         results = cursor.fetchall()
-        # cursor.close()
-        return render_template('households.j2', households=results)
+    return render_template('households.j2', households=results)
 
-@app.route('/households-edit')
-def households_edit():
-    return render_template("households-edit.j2")
+
+@app.route('/households-edit/<int:id>', methods=['POST', 'GET'])
+def households_edit(id):
+    if request.method == 'GET':
+        query = 'SELECT * FROM Households WHERE id_household = %s' % (id)
+        cursor = mysql.connection.cursor()
+        cursor.execute(query)
+        results = cursor.fetchall()
+        query2 = "SELECT id_household, name FROM Households;"
+        cursor = mysql.connection.cursor()
+        cursor.execute(query2)
+        data = cursor.fetchall()
+        return render_template("households-edit.j2", results=results, address=data)
+    
+    if request.method == 'POST':
+        if request.form.get('Edit_Household'):
+            name = request.form['name']
+            address = request.form['address']
+
+            # no null inputs
+            query = 'UPDATE Households SET Households.name = %s, Households.address = %s WHERE id_household = %s;'
+            cursor = mysql.connection.cursor()
+            cursor.execute(query, (name, address, id))
+            mysql.connection.commit()
+            return redirect('/households')
+
+
+
+@app.route('/households-delete/<int:id>')
+def households_delete(id):
+    query = 'DELETE FROM Households WHERE id_household = "%s";'
+    cursor = mysql.connection.cursor()
+    cursor.execute(query, (id,))
+    mysql.connection.commit()
+    return redirect('/households')
 
 
 @app.route('/households-members')
@@ -132,7 +163,8 @@ def stores_edit():
 
 
 
-# # Listening for the port
-# if __name__ == "__main__":
+# Listening for the port
+if __name__ == "__main__":
+    app.run(debug=True)
 #     port = int(os.environ.get('PORT', 36135))
 #     app.run(port=port, debug=True)
