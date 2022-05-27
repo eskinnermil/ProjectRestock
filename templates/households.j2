@@ -12,40 +12,49 @@ Households
 
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-            {% for key in households[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
-                <th>Edit</th>
-                <th>Delete</th>
-            <tr>
-        <tbody>
-        {% for attribute in households %}
-            <tr>
-                {% for key in attribute.keys() %}
-                <td>{{attribute[key]}}</td>
-                {% endfor %}
-                <td><a href="{{url_for('households_edit')}}" />Edit</td>
-                <td><a href="{{url_for('households')}}" />Delete</td>
-            </tr>
-        {% endfor %}
-    </table>
+<table>
+<thead>
+<tr>
+{% if households %}
+    {% for key in households[0].keys() %}
+        <th>{{ key }}</th>
+    {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
+{% else %}
+    <p>There are currently no households listed.</p>
+{% endif %}
+</tr>
 
-    <br />
+<tbody>
+{% for attribute in households %}
+<tr>
+    {% for key in attribute.keys() %}
+        <td>{{attribute[key]}}</td>
+    {% endfor %}
+        <td><a href="households-edit/{{attribute.id}}" />Edit</td>
+        <td><a href="households-delete/{{attribute.id}}" />Delete</td>
+</tr>
+{% endfor %}
+</table>
 
-    <form action="{{url_for('households')}}" method="POST">
-    <fieldset><legend> Add a Household</legend>
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>address
-        <input type="text" name="address" size="12" maxlength="145" required="required">
-    </label>
-    <br />
-    <button type="submit">Add</button>
-    </fieldset>
-    </form>
+<br />
+
+<form action="{{url_for('view_households.households')}}" method="POST">
+<fieldset>
+<legend> Add a Household</legend>
+
+<label>name
+    <input type="text" name="name" value="" size="12" maxlength="45" required="required">
+</label>
+
+<br />
+<label>address
+    <input type="text" name="address" value="" size="12" maxlength="145">
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Add_Household" value="Add Household">Add</button>
+</form>
 {% endblock %}

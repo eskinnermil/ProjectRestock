@@ -12,43 +12,64 @@ Households Members
 
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-            {% for key in households_members[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
-                <th>Edit</th>
-                <th>Delete</th>
-            <tr>
-        <tbody>
-        {% for attribute in households_members %}
-            <tr>
-                {% for key in attribute.keys() %}
-                <td>{{attribute[key]}}</td>
-                {% endfor %}
-                <td><a href="{{url_for('households_members_edit')}}" />Edit</td>
-                <td><a href="{{url_for('households_members')}}" />Delete</td>                
-            </tr>
-        {% endfor %}
-    </table>
+<table>
+<thead>
+<tr>
+{% if households_members %}
+    {% for key in households_members[0].keys() %}
+        <th>{{ key }}</th>
+    {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
+{% else %}
+    <p>There are currently no households members listed.<p>
+{% endif %}
+</tr>
 
-    <br />
+<tbody>
+{% for attribute in households_members %}
+<tr>
+    {% for key in attribute.keys() %}
+        <td>{{attribute[key]}}</td>
+    {% endfor %}
+        <td><a href="households-members-edit/{{attribute.id}}" />Edit</td>
+        <td><a href="households-members-delete/{{attribute.id}}" />Delete</td>
+</tr>
+{% endfor %}
+</table>
 
-    <form action="{{url_for('households_members')}}" method="POST">
-    <fieldset><legend> Add a Household Member</legend>
-    <label>household
-        <input type ="number" name="id_household" size=12 maxlength="45" required="required">
-    </label>
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>runner status
-        <input type="text" name="runner_status" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Add</button>
-    </fieldset>
-    </form>
+<br />
+
+<form action="{{url_for('view_households_members.households_members')}}" method="POST">
+<fieldset>
+<legend>Add a Household Member</legend>
+
+<br />
+<label>name
+    <input type="text" name="name" size="12" maxlength="45" required="required">
+</label>
+
+<br />
+<label>household
+    <select name="id_household">
+    <option value="">Select a household</option>
+    {% for household in household_dropdown %}
+    <option value="{{ household.id_household }}">{{ household.name }}</option>
+    {% endfor %}
+    </select>
+</label>
+
+<br />
+<label>runner status
+    <select name="runner_status" required>
+    <option value="">Select runner status</option>
+    <option value="1">Runner</option>
+    <option value="0">Not Runner</option>
+    </select>
+</label>
+
+<br />
+    <button type="submit" name="Add_Households_Members" value="Add Households Member">Add</button>
+</fieldset>
+</form>
 {% endblock %}

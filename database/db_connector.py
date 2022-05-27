@@ -1,5 +1,4 @@
-from flask_mysqldb import MySQL
-import mysql.connector
+import MySQLdb
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -13,13 +12,18 @@ passwd = os.environ.get("340DBPW")
 db = os.environ.get("340DB")
 
 def connect_to_database(host = host, user = user, passwd = passwd, db = db):
-    db_connection = mysql.connector.connect(host,user,passwd,db)
+    db_connection = MySQLdb.connect(host,user,passwd,db)
     return db_connection
 
-def execute_query(query):
-    cursor = mysql.connection.cursor()
-    cursor.execute(query)
-    mysql.connection.commit();
-    results = cursor.fetchall()
-    cursor.close()
-    return results
+def execute_query(db_connection = None, query = None, query_params = ()):
+    if db_connection is None:
+        print("No connection to the database found! Have you called connect_to_database() first?")
+        return None
+
+    if query is None or len(query.strip()) == 0:
+        print("query is empty! Please pass a SQL query in query")
+        return None
+    cursor = db_connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute(query, query_params)
+    db_connection.commit()
+    return cursor

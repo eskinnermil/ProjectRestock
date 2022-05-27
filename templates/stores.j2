@@ -12,44 +12,53 @@ Stores
 
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-            {% for key in stores[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
-                <th>Edit</th>
-                <th>Delete</th>
-            <tr>
-        <tbody>
-        {% for attribute in stores %}
-            <tr>
-                {% for key in attribute.keys() %}
-                <td>{{attribute[key]}}</td>
-                {% endfor %}
-                <td><a href="{{url_for('stores_edit')}}" />Edit</td>
-                <td><a href="{{url_for('stores')}}" />Delete</td>
-            </tr>
-        {% endfor %}
-    </table>
+<table>
+<thead>
+<tr>
+{% if stores %}
+    {% for key in stores[0].keys() %}
+        <th>{{ key }}</th>
+    {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
+{% else %}
+    <p>There are currently no stores listed.</p>
+{% endif %}
+</tr>
+<tbody>
+{% for attribute in stores %}
+<tr>
+    {% for key in attribute.keys() %}
+        <td>{{attribute[key]}}</td>
+    {% endfor %}
+        <td><a href="stores-edit/{{attribute.id}}" />Edit</td>
+        <td><a href="stores-delete/{{attribute.id}}" />Delete</td>
+</tr>
+{% endfor %}
+</table>
 
-    <br />
+<br />
 
-    <form action="{{url_for('stores')}}" method="POST">
-    <fieldset><legend> Add a Store</legend>
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>address
-        <input type="text" name="address" size="12" maxlength="145" required="required">
-    </label>
-    <br />
-    <label>hours open
-        <input type="text" name="hours_open" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Add</button>
-    </fieldset>
-    </form>
+<form action="{{url_for('view_stores.stores')}}" method="POST">
+<fieldset>
+<legend>Add a Store</legend>
+
+<label>name
+    <input type="text" name="name" size="12" maxlength="45" required="required">
+</label>
+
+<br />
+<label>address
+    <input type="text" name="address" size="12" maxlength="145" required="required">
+</label>
+
+<br />
+<label>hours_open
+    <input type="text" name="hours_open" size="12" maxlength="45">
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Add_Stores" value="Add Store">Add</button>
+</form>
 {% endblock %}

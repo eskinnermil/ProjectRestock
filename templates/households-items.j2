@@ -12,48 +12,55 @@ Households Items
 
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-            {% for key in households_items[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
-                {# <th>Delete</th> #}
-            <tr>
-        <tbody>
-        {% for attribute in households_items %}
-            <tr>
-                {% for key in attribute.keys() %}
-                <td>{{attribute[key]}}</td>
-                {% endfor %}
-                {# <td><a href="{{url_for('households_items')}}" />Delete</td> #}
-            </tr>
-        {% endfor %}
-    </table>
+<table>
+<thead>
+{% if households_items %}
+<tr>
+    {% for key in households_items[0].keys() %}
+        <th>{{ key }}</th>
+    {% endfor %}
+        <th>Delete</th>
+{% else %}
+    <p>There are currently no households items listed.</p>
+{% endif %}
+</tr>
 
-    <form action="{{url_for('households_items')}}" method="POST">
-    <fieldset><legend> Add a Household Item</legend>
-    <label>type
-        <select name="number" required>
-        <option value="">Select a type</option>
-        <option value="1">Toiletries</option>
-        <option value="2">Cleaning Supplies</option>
-        <option value="3">Groceries</option>
-        <option value="4">Pharmacy</option>
-        <option value="5">Pet Supplies</option>
-        <option value="6">Gardening</option>
-        </select>
-    </label>
-    <br />
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>best if used by
-        <input type="text" name="best_if_used_by" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Add</button>
-    </fieldset>
-    </form>
+<tbody>
+    {% for attribute in households_items %}
+<tr>
+    {% for key in attribute.keys() %}
+        <td>{{attribute[key]}}</td>
+    {% endfor %}
+        <td><a href="households-items-delete/{{attribute.id}}" />Delete</td>
+</tr>
+{% endfor %}
+</table>
+
+<form action="{{url_for('view_households_items.households_items')}}" method="POST">
+<fieldset>
+<legend>Add a Household Item</legend>
+
+<label>item type
+    <select name="item_type">
+    <option value="">Select an item type</option>
+    {% for type in items_types_dropdown %}
+    <option value="{{ type.id_item_type }}">{{ type.name }}</option>
+    {% endfor %}
+    </select>
+</label>
+
+<br />
+<label>name
+    <input type="text" name="name" size="12" maxlength="45" required="required">
+</label>
+
+<br />
+<label>best if used by
+    <input type="date" name="best_if_used_by" size="12" maxlength="45" required="required">
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Add_Households_Items" value="Add a Household Item">Add</button>
+</form>
 {% endblock %}

@@ -12,47 +12,78 @@ Households Inventories
 
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-            {% for key in households_inventories[0].keys() %}
-                <th>{{ key }}</th>
-            {% endfor %}
-                <th>Edit</th>
-                <th>Delete</th>
-            <tr>
-        <tbody>
-        {% for attribute in households_inventories %}
-            <tr>
-                {% for key in attribute.keys() %}
-                <td>{{attribute[key]}}</td>
-                {% endfor %}
-                <td><a href="{{url_for('households_inventories_edit')}}" />Edit</td>
-                <td><a href="{{url_for('households_inventories')}}" />Delete</td>
-            </tr>
-        {% endfor %}
-    </table>
+<table>
+<thead>
+<tr>
+{% if households_inventories %}
+    {% for key in households_inventories[0].keys() %}
+        <th>{{ key }}</th>
+    {% endfor %}
+        <th>Edit</th>
+        <th>Delete</th>
+{% else %}
+    <p>There are currently no households inventories listed.</p>
+{% endif %}
+</tr>
 
-    <br />
+<tbody>
+{% for attribute in households_inventories %}
+<tr>
+    {% for key in attribute.keys() %}
+        <td>{{attribute[key]}}</td>
+    {% endfor %}
+        <td><a href="households-inventories-edit/{{attribute.id}}" />Edit</td>
+        <td><a href="households-inventories-delete/{{attribute.id}}" />Delete</td>
+</tr>
+{% endfor %}
+</table>
 
-    <form action="{{url_for('households_inventories')}}" method="POST">
-    <fieldset><legend> Add a Household Inventory</legend>
-    <label>household
-        <input type ="number" name="id_household" size="12" maxlength="45" required="required">
-    </label>
-    <label>item
-        <input type="number" name="id_item" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>amount left
-        <input type="text" name="amount_left" size="12" maxlength="45" required="required">
-    </label>
-    <br />    
-    <label>restock status
-        <input type="text" name="restock_status" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Add</button>
-    </fieldset>
-    </form>    
+<br />
+
+<form action="{{url_for('view_households_inventories.households_inventories')}}" method="POST">
+<fieldset>
+<legend>Add a Household Inventory</legend>
+    
+<label>household
+    <select name="id_household" required>
+    <option value="">Select a household</option>
+    {% for household in household_dropdown %}
+    <option value="{{ household.id_household }}">{{ household.name }}</option>
+    {% endfor %}
+    </select>
+</label>
+
+<br />
+<label>item
+    <select name="id_item" required>
+    <option value="">Select an item</option>
+    {% for item in items_dropdown %}
+    <option value="{{ item.id_item }}">{{ item.name }}</option>
+    {% endfor %}
+    </select>
+</label>
+
+<br />
+<label>amount left
+    <select name="amount_left" required>
+    <option value="">Select amount left</option>
+    <option value="Empty">Empty</option>
+    <option value="Running Low">Running Low</option>
+    <option value="Still Plenty">Still Plenty</option>
+    <option value="Fully Stocked">Fully Stocked</option>
+    </select>
+</label>
+
+<br />    
+<label>restock status
+  <input type="radio" id="restock_status" name="restock_status" value="1" required>
+    <label for="restock_status">Restock</label>
+  <input type="radio" id="restock_status" name="restock_status" value="0" required>
+    <label for="restock_status">Currently Stocked</label>
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Add_Households_Inventories" value="Add a Household Inventory">Add</button>
+</form>    
 {% endblock %}

@@ -12,21 +12,37 @@ Households Members - Edit Selection
 
 
 {% block content %}
-    <form action="{{url_for('households_members')}}" method="PUT">
-    <fieldset><legend> Edit a Household Member</legend>
-    <label>household
-        <input type ="number" name="id_household" size=12 maxlength="45" required="required">
-    </label>
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>runner status
-        <input type="text" name="runner_status" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Submit</button>
-    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='{{url_for('households_members')}}';" />   
-    </fieldset>
-    </form>
+<form method="POST">
+<fieldset>
+<legend>Edit a Household Member</legend>
+
+<br />
+<label>name
+    <input type="text" class="form-control" name="name" value="{{ households_members[0]["name"] }}" required=required>
+</label>
+
+<br />
+<label>household
+    <select name="id_household">
+    <option value="">Select a household</option>
+    {% for household in household_dropdown %}
+    <option value="{{ household.id_household }}">{{ household.name }}</option>
+    {% endfor %}
+    </select>
+</label>    
+
+<br />
+<label>runner status
+    <select name="runner_status" required=required>
+    <option value="">Select runner status</option>
+    <option value="1">Runner</option>
+    <option value="0">Not Runner</option>
+    </select>
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Edit_Households_Members" value="Edit Household Member">Submit</button>
+<a href='{{url_for('view_households_members.households_members')}}'><input type="button" name="Cancel" value="Cancel"/></a>
+</form>
 {% endblock %}

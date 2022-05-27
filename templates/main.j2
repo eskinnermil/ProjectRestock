@@ -23,13 +23,13 @@
     <div>
         <ul>
             <li id="Nav"><a href="{{url_for('index')}}">Index || </a></li>
-            <li id="Nav"><a href="{{url_for('households')}}">Households || </a></li>
-            <li id="Nav"><a href="{{url_for('households_members')}}">Households Members || </a></li>
-            <li id="Nav"><a href="{{url_for('households_inventories')}}">Households Inventories || </a></li>
-            <li id="Nav"><a href="{{url_for('households_items')}}">Households Items || </a></li>
-            <li id="Nav"><a href="{{url_for('items_types')}}">Items Types || </a></li>
-            <li id="Nav"><a href="{{url_for('stores_inventories')}}">Stores Inventories || </a></li>
-            <li id="Nav"><a href="{{url_for('stores')}}">Stores</a></li>
+            <li id="Nav"><a href="{{url_for('view_households.households')}}">Households || </a></li>
+            <li id="Nav"><a href="{{url_for('view_households_members.households_members')}}">Households Members || </a></li>
+            <li id="Nav"><a href="{{url_for('view_households_inventories.households_inventories')}}">Households Inventories || </a></li>
+            <li id="Nav"><a href="{{url_for('view_households_items.households_items')}}">Households Items || </a></li>
+            {# <li id="Nav"><a href="{{url_for('view_items_types.items_types')}}">Items Types || </a></li>
+            <li id="Nav"><a href="{{url_for('view_stores_inventories.stores_inventories')}}">Stores Inventories || </a></li>
+            <li id="Nav"><a href="{{url_for('view_stores.stores')}}">Stores</a></li> #}
 
         </ul>
     </div>

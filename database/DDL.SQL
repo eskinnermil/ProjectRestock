@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS `Households` (
 --
 CREATE TABLE IF NOT EXISTS `Households_Members` (
   `id_household_member` int(11) NOT NULL AUTO_INCREMENT,
-  `id_household` int(11) NOT NULL,
+  `id_household` int(11),
   `name` varchar(45) NOT NULL,
   `runner_status` TINYINT NOT NULL,
   PRIMARY KEY (`id_household_member`),
-  FOREIGN KEY (`id_household`) REFERENCES Households(`id_household`) ON DELETE NO ACTION
+  FOREIGN KEY (`id_household`) REFERENCES Households(`id_household`) ON DELETE CASCADE
 );
 
 --
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Households_Inventories` (
   `amount_left` varchar(45) NOT NULL,
   `restock_status` TINYINT NOT NULL,
   PRIMARY KEY (`id_household_inventory`),
-  FOREIGN KEY (`id_household`) REFERENCES Households(`id_household`) ON DELETE NO ACTION,
+  FOREIGN KEY (`id_household`) REFERENCES Households(`id_household`) ON DELETE CASCADE,
   FOREIGN KEY (`id_item`) REFERENCES Households_Items(`id_item`) ON DELETE NO ACTION
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `Stores` (
   `id_store` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `address` varchar(145) NOT NULL,
-  `hours_open` varchar(45) NOT NULL,
+  `hours_open` varchar(45),
   PRIMARY KEY (`id_store`)
 );
 

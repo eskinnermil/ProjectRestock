@@ -12,22 +12,25 @@ Stores - Edit Selection
 
 
 {% block content %}
-    <form action="{{url_for('stores')}}" method="PUT">
-    <fieldset><legend> Edit a Store</legend>
-    <label>name
-        <input type="text" name="name" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <label>address
-        <input type="text" name="address" size="12" maxlength="145" required="required">
-    </label>
-    <br />
-    <label>hours open
-        <input type="text" name="hours_open" size="12" maxlength="45" required="required">
-    </label>
-    <br />
-    <button type="submit">Submit</button>
-    <input type="button" name="Cancel" value="Cancel" onClick="window.location.href='{{url_for('stores')}}';" />   
-    </fieldset>
-    </form>
+<form method="POST">
+<fieldset>
+<legend>Edit a Store</legend>
+    <input type="hidden" name="id_store" value="{{request.form['id_store']}}" required="required">
+<label>name
+    <input type="text" name="name" value="{{ stores[0]["name"] }}" size="12" maxlength="45" required="required">
+</label>
+<br />
+<label>address
+    <input type="text" name="address" value="{{ stores[0]["address"] }}" size="12" maxlength="145" required="required">
+</label>
+<br />
+<label>hours_open
+    <input type="text" name="hours_open" value="{{ stores[0]["hours_open"] }}" size="12" maxlength="45">
+</label>
+
+<br />
+</fieldset>
+<button type="submit" name="Edit_Stores" value="Edit Household">Submit</button>
+<a href='{{url_for('view_stores.stores')}}'><input type="button" name="Cancel" value="Cancel"/></a>
+</form>
 {% endblock %}
