@@ -24,5 +24,5 @@ The following functionality is **completed**:
 
 ## Screenshots
 
-<img src='restock1.JPG' title='Home Page' width='' alt='Home page' />
-<img src='restock2.JPG' title='Household Inventory Page' width='' alt='Household Inventory page' />
+<img src='restock1.jpg' title='Home Page' width='' alt='Home page' />
+<img src='restock2.jpg' title='Household Inventory Page' width='' alt='Household Inventory page' />
