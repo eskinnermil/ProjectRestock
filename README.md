@@ -1,4 +1,4 @@
-# Project Restock.py
+# Project Restock
 
 Project Restock is a Flask/MySQL web app designed for an administrator to handle restocking needs of various households.
 
